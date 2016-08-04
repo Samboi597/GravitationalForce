@@ -1,0 +1,65 @@
+#include <iostream>
+#include <string>
+
+class Planet
+{
+private:
+	std::string name;
+	float radius, density, volume, mass, force;
+	const float PI = 3.14159, GRAV = 6.67*pow(10.0, -11.0);
+public:
+	void enterValues();
+	float calculateVolume();
+	float calculateMass();
+	float calculateForce(float);
+	void printValues();
+};
+
+void Planet::enterValues()
+{
+	std::cin >> name;
+	std::cin >> radius;
+	std::cin >> density;
+}
+
+float Planet::calculateVolume()
+{
+	volume = 4 * (PI*(radius*radius*radius)) / 3;
+	return volume;
+}
+
+float Planet::calculateMass()
+{
+	mass = volume*density;
+	return mass;
+}
+
+float Planet::calculateForce(float objMass)
+{
+	force = GRAV*(objMass*mass)/(radius*radius);
+	return force;
+}
+
+void Planet::printValues()
+{
+	std::cout << name << ": " << force << std::endl;
+}
+
+int main()
+{
+	int n, i;
+	float mass;
+	Planet object[100];
+	
+	std::cin >> mass;
+	std::cin >> n;
+	for (i = 0; i < n; i++)
+	{
+		object[i].enterValues();
+		object[i].calculateVolume();
+		object[i].calculateMass();
+		object[i].calculateForce(mass);
+		object[i].printValues();
+	}
+	return 0;
+}
